@@ -1,7 +1,7 @@
 ﻿TxtEd();
 
-static void TxtEd()
-{
+static void TxtEd() // #TODO make this into a class.
+{ 
     int lineNumber = 0;
     Console.Write("#" + lineNumber + ": ");
     int pos = Console.CursorLeft;
@@ -22,10 +22,10 @@ static void TxtEd()
                     Console.CursorLeft -= 1;
                 }
             }
-            else if (info.Key == ConsoleKey.Enter)
-            {
-                Console.Write(Environment.NewLine);
-                lineNumber++;
+            else if (info.Key == ConsoleKey.Enter) // #TODO enable navigation using arrow keys (maybe also hjkl like in vim?)
+            {                                      // #TODO enable the use of shortcuts. Like "CTRL + :" to be enable command mode. "CTRL + i" for insert mode.
+                Console.Write(Environment.NewLine);// #TODO commands could be their own class?
+                lineNumber++;                      // #TODO: remove the nested ifs
                 Console.Write("#" + lineNumber + ": ");
                 
             }

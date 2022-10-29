@@ -46,7 +46,7 @@ static void TxtEd() // #TODO make this into a class.
                             var cursot = Console.CursorLeft; 
                             userTxt.RemoveAt(userTxt.Count - 1);
                             //Console.CursorLeft -= '\t';
-                            Console.Write('\t'.); // #TODO GET TABS WORKING!!!!!!!!!!!!!
+                            Console.Write('\t'); // #TODO GET TABS WORKING!!!!!!!!!!!!!
                             Console.Write('\t');
                             //Console.CursorLeft -= '\t';
                         }

@@ -16,7 +16,7 @@ static void TxtEd() // #TODO make this into a class.
     while (true)
     {
         info = Console.ReadKey(true);
-       
+
         if (info.Modifiers == ConsoleModifiers.Control)
         {
             shortCut = Console.ReadKey(true);
@@ -41,10 +41,21 @@ static void TxtEd() // #TODO make this into a class.
                 case ConsoleKey.Backspace:
                     if (Console.CursorLeft > pos)
                     {
+                        if (userTxt[userTxt.Count - 1] == '\t')
+                        {
+                            var cursot = Console.CursorLeft; 
+                            userTxt.RemoveAt(userTxt.Count - 1);
+                            //Console.CursorLeft -= '\t';
+                            Console.Write('\t'.); // #TODO GET TABS WORKING!!!!!!!!!!!!!
+                            Console.Write('\t');
+                            //Console.CursorLeft -= '\t';
+                        }
+                        else if(userTxt.Count > 0){
                         userTxt.RemoveAt(userTxt.Count - 1);
-                        Console.CursorLeft -= 1;
-                        Console.Write(' ');
-                        Console.CursorLeft -= 1;
+                        //Console.CursorLeft -= 1;
+                        Console.Write("\b \b");
+                        //Console.CursorLeft -= 1;
+                        }
                     }
 
                     break;
@@ -55,12 +66,17 @@ static void TxtEd() // #TODO make this into a class.
                     break;
                 case ConsoleKey.Spacebar:
                     userTxt.Add(' ');
+                    Console.Write(userTxt[userTxt.Count - 1]);
+                    break;
+                case ConsoleKey.Tab:
+                    userTxt.Add('\t');
+                    Console.Write(userTxt[userTxt.Count - 1]);
                     break;
                 default:
                     if (Char.IsLetterOrDigit(info.KeyChar))
                     {
-                        Console.Write(info.KeyChar);
                         userTxt.Add(info.KeyChar);
+                        Console.Write(userTxt[userTxt.Count - 1]);
                     }
 
                     break;

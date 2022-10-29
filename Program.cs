@@ -1,39 +1,71 @@
 ﻿TxtEd();
 
 static void TxtEd() // #TODO make this into a class.
-{ 
-    int lineNumber = 0;
+{
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.Clear();
+    int lineNumber = 1;
     Console.Write("#" + lineNumber + ": ");
     int pos = Console.CursorLeft;
     ConsoleKeyInfo info;
+    ConsoleKeyInfo shortCut;
+
     List<char> userTxt = new List<char>();
-    
+
 
     while (true)
     {
         info = Console.ReadKey(true);
-            if (info.Key == ConsoleKey.Backspace && Console.CursorLeft > pos)
+       
+        if (info.Modifiers == ConsoleModifiers.Control)
+        {
+            shortCut = Console.ReadKey(true);
+            switch (shortCut.Key)
             {
-                if (userTxt.Count > 0)
-                {
-                    userTxt.RemoveAt(userTxt.Count - 1);
-                    Console.CursorLeft -= 1;
-                    Console.Write(' ');
-                    Console.CursorLeft -= 1;
-                }
+                case ConsoleKey.M:
+                    userTxt.Clear();
+                    Console.Clear();
+                    lineNumber = 1;
+                    Console.Write("#" + lineNumber + ": ");
+                    break;
             }
-            else if (info.Key == ConsoleKey.Enter) // #TODO enable navigation using arrow keys (maybe also hjkl like in vim?)
-            {                                      // #TODO enable the use of shortcuts. Like "CTRL + :" to be enable command mode. "CTRL + i" for insert mode.
-                Console.Write(Environment.NewLine);// #TODO commands could be their own class?
-                lineNumber++;                      // #TODO: remove the nested ifs
-                Console.Write("#" + lineNumber + ": ");
-                
-            }
-            else if (Char.IsLetterOrDigit(info.KeyChar))
+        }
+        else
+        {
+            switch (info.Key)
             {
-                Console.Write(info.KeyChar);
-                userTxt.Add(info.KeyChar);
+                // #TODO enable navigation using arrow keys (maybe also hjkl like in vim?)
+                // #TODO enable the use of shortcuts. Like "CTRL + :" to be enable command mode. "CTRL + i" for insert mode.
+                // #TODO commands could be their own class?
+                // #TODO: remove the nested ifs
+                case ConsoleKey.Backspace:
+                    if (Console.CursorLeft > pos)
+                    {
+                        userTxt.RemoveAt(userTxt.Count - 1);
+                        Console.CursorLeft -= 1;
+                        Console.Write(' ');
+                        Console.CursorLeft -= 1;
+                    }
+
+                    break;
+                case ConsoleKey.Enter:
+                    Console.Write(Environment.NewLine);
+                    lineNumber++;
+                    Console.Write("#" + lineNumber + ": ");
+                    break;
+                case ConsoleKey.Spacebar:
+                    userTxt.Add(' ');
+                    break;
+                default:
+                    if (Char.IsLetterOrDigit(info.KeyChar))
+                    {
+                        Console.Write(info.KeyChar);
+                        userTxt.Add(info.KeyChar);
+                    }
+
+                    break;
             }
+        }
     }
 }
 

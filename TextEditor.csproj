@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <Compile Remove="OptionListClass.cs" />
+      <Compile Remove="WhiteSpaceTabAndSpacebar.cs" />
     </ItemGroup>
 
 </Project>

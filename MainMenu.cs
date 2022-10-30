@@ -4,7 +4,7 @@ public class MainMenu
 {
     private string FileName { get; set; }
 
-    private void MainMenuOptions()
+    public void MainMenuOptions()
     {
         Console.Clear();
         Console.WriteLine(
@@ -26,6 +26,14 @@ public class MainMenu
             else if(words[0] == "exit" && words.Length == 1)
             {
                 Environment.Exit(0);
+            }
+            else if (words[0] == "game" && words.Length == 1)
+            {
+                Console.WriteLine("Add a game later");
+            }
+            else if (words[0] == "editor" && words.Length == 1)
+            {
+                MakeNewFile();
             }
         }
     }
@@ -74,7 +82,7 @@ public class MainMenu
                 case ConsoleKey.Y:
                     // Run Editor
                     WriteFileName();
-                    var textEditor = new TextEditor(FileName);
+                    var textEditor = new TextEditorClass(FileName);
 
                     break;
                 case ConsoleKey.N:

@@ -1,4 +1,6 @@
-﻿namespace TextEditor;
+﻿using System.Text;
+
+namespace TextEditor;
 
 public class TextEditor
 {
@@ -7,9 +9,20 @@ public class TextEditor
     private void StartEditor()
     {
         Console.Clear();
-        var str = "HEI DET ER MEG!";
-        str = str + " MEG PÅ DEG";
-        Console.WriteLine(str);
+
+        
+    }
+    
+    public void GetByteAndBitCount(string sInput)
+    {
+        Encoding utf8 = Encoding.UTF8;
+        uint byteCount = Convert.ToUInt32(utf8.GetByteCount(sInput));
+        uint bitCount = byteCount * 8;
+        Console.WriteLine(
+            "Bytes needed to encode: '{0}'" + '\n' +
+            "ByteSize of '{0}' is: {1}" + '\n' +
+            "BitSize of '{0} is: '{2}'", NameOfFile, byteCount, bitCount);
+
     }
 
     public TextEditor(string nameOfFile)

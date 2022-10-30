@@ -61,7 +61,7 @@ public class TextEditorClass
                     Console.Clear();
                     newString.Clear();
                     lineNumber = 1;
-                    Console.Write("#" + lineNumber + ": ");
+                    Console.Write("#" + lineNumber + ": ");//
                 }
             }
         }

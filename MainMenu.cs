@@ -1,6 +1,6 @@
 ﻿namespace TextEditor;
 
-public class MainMenu
+public class MainMenu//
 {
     private string FileName { get; set; }
 

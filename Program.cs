@@ -1,4 +1,4 @@
-﻿TxtEd();
+﻿/**/TxtEd();
 
 static void TxtEd() // #TODO make this into a class.
 {
@@ -9,6 +9,8 @@ static void TxtEd() // #TODO make this into a class.
     int pos = Console.CursorLeft;
     ConsoleKeyInfo info;
     ConsoleKeyInfo shortCut;
+    char singleSpace = ' ';
+    char[] tab = { singleSpace, singleSpace, singleSpace, singleSpace, singleSpace}; // 1 tab = 5 singleSpace
 
     List<char> userTxt = new List<char>();
 
@@ -41,21 +43,11 @@ static void TxtEd() // #TODO make this into a class.
                 case ConsoleKey.Backspace:
                     if (Console.CursorLeft > pos)
                     {
-                        if (userTxt[userTxt.Count - 1] == '\t')
-                        {
-                            var cursot = Console.CursorLeft; 
-                            userTxt.RemoveAt(userTxt.Count - 1);
-                            //Console.CursorLeft -= '\t';
-                            Console.Write('\t'); // #TODO GET TABS WORKING!!!!!!!!!!!!!
-                            Console.Write('\t');
-                            //Console.CursorLeft -= '\t';
-                        }
-                        else if(userTxt.Count > 0){
+                        
                         userTxt.RemoveAt(userTxt.Count - 1);
-                        //Console.CursorLeft -= 1;
+                        Console.CursorLeft -= 1;
                         Console.Write("\b \b");
-                        //Console.CursorLeft -= 1;
-                        }
+                        Console.CursorLeft -= 1;
                     }
 
                     break;
@@ -65,12 +57,17 @@ static void TxtEd() // #TODO make this into a class.
                     Console.Write("#" + lineNumber + ": ");
                     break;
                 case ConsoleKey.Spacebar:
-                    userTxt.Add(' ');
+                    userTxt.Add(singleSpace);
                     Console.Write(userTxt[userTxt.Count - 1]);
                     break;
                 case ConsoleKey.Tab:
-                    userTxt.Add('\t');
-                    Console.Write(userTxt[userTxt.Count - 1]);
+                    foreach (var element in tab)
+                    {
+                        userTxt.Add(singleSpace);
+                        Console.Write(userTxt[userTxt.Count - 1]);
+                        //pos++;
+                    }
+                    //userTxt.Add('\t');
                     break;
                 default:
                     if (Char.IsLetterOrDigit(info.KeyChar))
